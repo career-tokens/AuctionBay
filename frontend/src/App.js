@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import Nav from "./components/Nav";
+import { Route, Routes, BrowserRouter as Router, Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { authContext } from "./context/authContext/authContextProvider";
+import Home from "./pages/Home";
+import Login from "./components/Login/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./components/Register/Register";
+import { socket } from "./socket/socket";
+import BidProduct from "./components/Bid/BidProduct";
 
 function App() {
+  const { user, isAuthReady } = useContext(authContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isAuthReady && (
+        <>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute user={user}>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/bid/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <BidProduct socket={socket} />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </>
+      )}
     </div>
   );
 }
