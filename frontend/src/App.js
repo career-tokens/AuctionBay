@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register/Register";
 import { socket } from "./socket/socket";
 import BidProduct from "./components/Bid/BidProduct";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const { user, isAuthReady } = useContext(authContext);
@@ -22,6 +23,14 @@ function App() {
               element={
                 <ProtectedRoute user={user}>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+              <Route
+              path="/profile"
+              element={
+                <ProtectedRoute user={user}>
+                  <Profile/>
                 </ProtectedRoute>
               }
             />

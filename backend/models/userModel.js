@@ -11,6 +11,9 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Please provide a password"],
   },
+  products: {
+    type:Array,
+  }
 });
 
 const User = mongoose.model("User", userSchema);

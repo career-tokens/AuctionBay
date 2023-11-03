@@ -60,7 +60,7 @@ const BidProduct = ({ socket }) => {
 
   // socket üzerinden geri dönen teklifi alıyoruz
   useEffect(() => {
-    socket.on("reciveBid", (data) => {
+    socket.on("recieveBid", (data) => {
       if (currentBid.currentBid < data.currentBid) {
         setCurrentBid(data);
       }
