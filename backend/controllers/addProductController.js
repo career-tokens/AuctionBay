@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 
 exports.addProduct = async (req, res) => {
-  const { username, url,description,model } = req.body;
+  const { username, url,description,model,id} = req.body;
 
   // Find the user in the database
   const user = await User.findOne({ username });
@@ -11,7 +11,7 @@ exports.addProduct = async (req, res) => {
     user.products = [];
   }
   //assemble the product object
-  const product = { url, description, model };
+  const product = { url, description, model,id };
   
   // Add the new product to the array
   user.products.push(product);

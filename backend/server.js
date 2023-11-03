@@ -25,6 +25,8 @@ const mongoUrl = process.env.MONGODB_URI;
 const userRouter = require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
 
+
+
 // parsing json for the request body
 app.use(express.json());
 
@@ -72,10 +74,7 @@ app.use(
 
 const connectWithRetry = () => {
   mongoose
-    .connect(mongoUrl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(mongoUrl)
     .then(() => console.log("successfully connected to the database"))
     .catch((err) => {
       console.log(err);

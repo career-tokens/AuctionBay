@@ -9,31 +9,26 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { authContext } from '../../context/authContext/authContextProvider';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const Profile = () => {
-  const profilePictureRef = useRef();
   const { user } = useContext(authContext);
+  console.log(user)
 
   const [productData, setProductData] = useState({
     url: "",
     description: "",
     model: "",
+    id:"",
     username: "",
   });
 
   const [productList, setProductList] = useState([]);
 
-  const handleUpload = () => {
-    const PP = profilePictureRef.current;
-      const imageData = PP.getData();
-      const file = imageData.file;
-    const imageAsDataURL = PP.getImageAsDataUrl();
-    setProductData({ ...productData, url: file });
-  };
 
   const save = async () => {
-    handleUpload();
-    const productDataWithUsername = { ...productData, username: user.username };
+    const { v4: uuidv4 } = require('uuid');
+    const productDataWithUsername = { ...productData, username: user.username ,id:uuidv4() };
     const api = "http://localhost:4000/users/addproduct";
     const response = await axios.post(api, productDataWithUsername);
 
@@ -64,18 +59,16 @@ const Profile = () => {
     <div className="flex justify-center items-center">
       <Card className="profileCard" style={{ width: "70%" }}>
         <CardContent>
-          <Typography variant="h4" component="div" gutterBottom>
-            Profile
+          <Typography variant="h4" component="div" gutterBottom sx={{textAlign:"center"}}>
+            Hello {user.username} !
           </Typography>
-          <Typography variant="h6" gutterBottom>
-            {user.name}
-          </Typography>
-          <div className="yourProducts">
-            <Grid container spacing={2}>
+          <div className="yourProducts text-center ">
+            <p style={{fontSize:"25px",color:"violet",marginBottom:"10px"}}>Your Products:</p>
+            <Grid container spacing={2} sx={{marginBottom:"10px"}}>
               {productList.map((product) => (
                 <Grid item xs={12} sm={6} md={4} key={product.id}>
                   <Card>
-                    <img src={product.url.imageSrc} alt={product.model} style={{ width: "100%" }} />
+                    <img src={product.url} alt={product.model} style={{ width: "100%" }} />
                     <CardContent>
                       <Typography variant="h6" component="div">
                         {product.model}
@@ -89,12 +82,14 @@ const Profile = () => {
               ))}
             </Grid>
           </div>
-          <div className="addProducts">
-            <ProfilePicture
-              ref={profilePictureRef}
-              useHelper={true}
-              debug={true}
-              cropSize={200}
+          <div className="addProducts flex flex-col text-center gap-y-3">
+          <p style={{fontSize:"25px",color:"violet"}}>Add Products:</p>
+          <TextField
+              id="model-name"
+              label="Image Public Link"
+              variant="outlined"
+              value={productData.url}
+              onChange={(e) => setProductData({ ...productData, url: e.target.value })}
             />
             <TextField
               id="model-name"
