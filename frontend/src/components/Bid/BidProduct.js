@@ -65,6 +65,17 @@ const BidProduct = ({ socket }) => {
     };}
   }, [product]);
 
+  
+  useEffect(() => {
+    socket.on("recieveBid", (data) => {
+      if (data&&currentBid.currentBid < data.currentBid) {
+        setCurrentBid(data);
+      }
+
+      setdataRecieved(data);
+    });
+  }, [socket]);
+
   // sending data to socket and update product in db
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,15 +94,6 @@ const BidProduct = ({ socket }) => {
     setIsDisabled(inputValue <= currentBid.currentBid);
   };
 
-  useEffect(() => {
-    socket.on("recieveBid", (data) => {
-      if (currentBid.currentBid < data.currentBid) {
-        setCurrentBid(data);
-      }
-
-      setdataRecieved(data);
-    });
-  }, [socket]);
 
   return (<>
 { currentBid&&product&&<div className="flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 ">

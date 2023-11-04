@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema({
   },
   lastBidder: {
     type: String,
-    required: [true, "Please provide a lastBidder"],
   },
   bids: [{ bidder: String, bid: Number }],
 });

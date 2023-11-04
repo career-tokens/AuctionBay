@@ -13,8 +13,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Profile = () => {
   const { user } = useContext(authContext);
-  console.log(user)
-
   const [productData, setProductData] = useState({
     url: "",
     description: "",
@@ -28,7 +26,7 @@ const Profile = () => {
 
   const save = async () => {
     const { v4: uuidv4 } = require('uuid');
-    const productDataWithUsername = { ...productData, username: user.username ,id:uuidv4() };
+    const productDataWithUsername = { ...productData, username: (user.username===undefined)?user:user.username ,id:uuidv4() };
     const api = "http://localhost:4000/users/addproduct";
     const response = await axios.post(api, productDataWithUsername);
 
@@ -42,7 +40,7 @@ const Profile = () => {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/users/${user.username}`);
+      const response = await axios.get(`http://localhost:4000/users/${(user.username===undefined)?user:user.username}`);
       if (response.status === 200) {
         setProductList(response.data.products);
       }
@@ -53,14 +51,22 @@ const Profile = () => {
 
   useEffect(() => {
     updateProductList();
-  }, [user.username]);
+  }, []);
+
+  const textEllipsis = (text) => {
+    if (text.length > 100) {
+      return text.slice(0, 100) + "...";
+    }
+    else
+      return text;
+  };
 
   return (
-    <div className="flex justify-center items-center">
-      <Card className="profileCard" style={{ width: "70%" }}>
+    <div className="flex justify-center items-center p-3 pb-4 w-fit mb-3 rounded-xl" style={{width:"85%",boxShadow: "10px 10px 19px 0px rgba(0,0,0,0.75)"}}>
+      <Card className="profileCard" style={{ width: "100%", }}>
         <CardContent>
-          <Typography variant="h4" component="div" gutterBottom sx={{textAlign:"center"}}>
-            Hello {user.username} !
+          <Typography variant="h4" component="div" gutterBottom sx={{textAlign:"center",color:"#4e60fe"}}>
+            Hello {(user.username===undefined)?user:user.username} !
           </Typography>
           <div className="yourProducts text-center ">
             <p style={{fontSize:"25px",color:"violet",marginBottom:"10px"}}>Your Products:</p>
@@ -74,7 +80,7 @@ const Profile = () => {
                         {product.model}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
-                        {product.description}
+                      {textEllipsis(product.description)}
                       </Typography>
                     </CardContent>
                   </Card>

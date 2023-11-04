@@ -3,10 +3,10 @@ import Nav from "../Nav";
 
 function Layout({ children }) {
   return (
-    <div className="sm:h-screen bg-[#dee8fd]">
+    <div className=" bg-[#4ec4ca]" style={{height:"fitContent",minHeight:"100vh"}}>
       <Nav />
-      <div className="max-w-[1300px] m-auto px-4">
-        <main>{children}</main>
+      <div className="max-w-[1300px] m-auto px-4 flex justify-center items-center">
+        {children}
       </div>
     </div>
   );

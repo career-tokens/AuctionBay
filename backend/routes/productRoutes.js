@@ -9,7 +9,8 @@ router
   .get(protect, productController.getAllProducts)
   .post(protect, productController.createProduct)
   .patch(protect, productController.updateProduct)
-  .put(protect, productController.updateProduct);
+  .put(protect, productController.updateProduct)
+  .delete(protect, productController.deleteProduct);
 
 // Route to handle requests related to a specific product
 router.route("/:model").get(productController.getProduct);

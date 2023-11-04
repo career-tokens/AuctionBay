@@ -1,3 +1,4 @@
+const Product = require("../models/productModel");
 const User = require("../models/userModel");
 
 exports.addProduct = async (req, res) => {
@@ -18,6 +19,21 @@ exports.addProduct = async (req, res) => {
 
   // Update the user in the database
   await user.save();
+
+  //for each product added , there needs to be a corresponding initial bid data present under "products" tab in database
+  const correspondingBidData = await Product.findOne({ model });
+
+  if (!correspondingBidData) {
+    // If a corresponding product doesn't exist, create one in the "Product" model
+    const newCorrespondingBidData = new Product({
+      model: model,
+      currentBid: 0,
+      lastBidder: null,
+      bids: null
+    });
+
+    await newCorrespondingBidData.save();
+  }
 
   // Send a success response
   res.status(200).json({ message: "Product added successfully" });

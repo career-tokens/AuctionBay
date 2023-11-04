@@ -9,13 +9,16 @@ function ProductCard({ product }) {
     if (text.length > 100) {
       return text.slice(0, 100) + "...";
     }
+    else
+      return text;
   };
 
   return (
     <Link to={`bid/${product.id}`}>
-      <div className="hover:scale-105 transition-all ease-in-out duration-200   bg-white border border-gray-200  shadow-2xl rounded-lg overflow-hidden ">
+      <div className="hover:scale-105 transition-all ease-in-out duration-200   bg-white border border-gray-200  shadow-2xl rounded-lg overflow-hidden "
+      style={{width:"380px",boxShadow:" 10px 10px 19px 0px rgba(0,0,0,0.75)"}}>
         <div className="overflow-hidden ">
-          <img src={product.url} className="w-full h-64"></img>
+          <img alt="" src={product.url} className="w-full h-64"></img>
         </div>
         <div className="px-4 py-6">
           <h1 className="text-lg font-semibold">{product.model}</h1>

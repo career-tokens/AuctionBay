@@ -14,7 +14,7 @@ function App() {
   const { user, isAuthReady } = useContext(authContext);
 
   return (
-    <div>
+    <>
       {isAuthReady && (
         <>
           <Routes>
@@ -48,7 +48,7 @@ function App() {
           </Routes>
         </>
       )}
-    </div>
+    </>
   );
 }
 
