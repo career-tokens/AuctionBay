@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://realtime-auction.vercel.app",
+    origin: "*",
   })
 );
 
