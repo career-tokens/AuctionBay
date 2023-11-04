@@ -13,7 +13,7 @@ function Products() {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`);
+      const response = await axios.post(`https://realtime-auction-backend.onrender.com/users/getproducts`);
       if (response.status === 200) {
         setProductList(response.data);
       }

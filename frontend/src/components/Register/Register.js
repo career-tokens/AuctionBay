@@ -8,7 +8,7 @@ function Register() {
 
   // custom hook to handle registration logic
   const { register, loading, error } = useRegister(
-    `${process.env.REACT_APP_TO_BACKEND_URL}/users/signup`
+    `https://realtime-auction-backend.onrender.com/users/signup`
   );
 
   const handleSubmit = (e) => {

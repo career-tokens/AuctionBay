@@ -26,7 +26,7 @@ const BidProduct = ({ socket }) => {
 
   const updateThings= async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`);//get all products
+      const response = await axios.post(`https://realtime-auction-backend.onrender.com/users/getproducts`);//get all products
       if (response.status === 200) {
         setProductList(response.data);
       }
