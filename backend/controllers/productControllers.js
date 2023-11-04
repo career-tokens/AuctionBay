@@ -43,7 +43,6 @@ exports.getProduct = async (req, res) => {
 
 // Function to update a product
 exports.updateProduct = async (req, res) => {
-  console.log(req.body.model);
   const query = { model: req.body.model };
   try {
     // Update the product in the database

@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN,
   })
 );
 
@@ -44,7 +44,7 @@ const http = require("http").Server(app);
 const socketIO = require("socket.io")(http, {
   // setted the cors origin to allow connections to react client
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN,
   },
 });
 // Pass to socket to handler to handle socket events from sockets/index.js

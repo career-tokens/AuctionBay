@@ -12,7 +12,7 @@ function BiddersList({ currentBid }) {
           {currentBid.bids.map((bid) => (
             <li key={bid.bidder + Math.random() * 20}>
               <span className="text-orange-700 font-medium">{bid.bidder}</span>{" "}
-              Bidded : {bid.bid} ₺
+              Bidded : ₹{bid.bid}
             </li>
           ))}
         </ul>

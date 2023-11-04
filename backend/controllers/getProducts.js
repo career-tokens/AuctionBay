@@ -16,7 +16,6 @@ exports.getproducts = async (req, res) => {
     // Send the merged products array as the response
     res.json(allProducts);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Error fetching products' });
   }
 };

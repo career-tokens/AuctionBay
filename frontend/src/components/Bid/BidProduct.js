@@ -20,16 +20,14 @@ const BidProduct = ({ socket }) => {
   });
   const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
-  const [room, setRoom] = useState("");//room will be updated
   const [product, setProduct] = useState({});//the specific product will be stored here
 
   const { getOneProduct, updateProduct } = useContext(auctionContext);
 
   const updateThings= async () => {
     try {
-      const response = await axios.post(`http://localhost:4000/users/getproducts`);//get all products
+      const response = await axios.post(`${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`);//get all products
       if (response.status === 200) {
-        console.log("response:",response)
         setProductList(response.data);
       }
     } catch (error) {
@@ -48,7 +46,6 @@ const BidProduct = ({ socket }) => {
   }, []);
   useEffect(() => {
     const item = productList.filter((item) => item.id === id).pop()
-    console.log("item:",item)
     setProduct({...item})
   },[productList])
 
@@ -56,17 +53,38 @@ const BidProduct = ({ socket }) => {
   useEffect(() => {
     if(product!=null)
     {
-      console.log("product in p1:",product)
       getOneProduct(product.model, socket);
       socket.emit("join", product.model, (msg) => console.log(msg));
 
     return () => {
       socket.emit("leave", product.model, (msg) => console.log(msg));
-    };}
+      };
+    }
   }, [product]);
 
   
+
+
+  // sending data to socket and update product in db
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newBid = createBid(product, currentBid, user, amount);
+    if (newBid.currentBid > currentBid.currentBid) {
+      socket.emit("bid", newBid, product.model);
+      setCurrentBid(newBid);
+      updateProduct(newBid);
+    } else {
+      socket.emit("bid", currentBid, product.model);
+    }
+  };
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+    setAmount(inputValue);
+    setIsDisabled(inputValue <= currentBid.currentBid);
+  };
+
   useEffect(() => {
+    console.log("socket=",socket)
     socket.on("recieveBid", (data) => {
       if (data&&currentBid.currentBid < data.currentBid) {
         setCurrentBid(data);
@@ -76,24 +94,6 @@ const BidProduct = ({ socket }) => {
     });
   }, [socket]);
 
-  // sending data to socket and update product in db
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newBid = createBid(product, currentBid, user, amount);
-    if (newBid.currentBid > currentBid.currentBid) {
-      socket.emit("bid", newBid, room);
-      setCurrentBid(newBid);
-      updateProduct(newBid);
-    } else {
-      socket.emit("bid", currentBid, room);
-    }
-  };
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    setAmount(inputValue);
-    setIsDisabled(inputValue <= currentBid.currentBid);
-  };
-
 
   return (<>
 { currentBid&&product&&<div className="flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 ">
@@ -101,7 +101,7 @@ const BidProduct = ({ socket }) => {
 
       <div className="sm:w-[500px] w-full">
         <h1 className="text-3xl">
-          Current Highest Bid: {currentBid.currentBid} ₺
+          Current Highest Bid: ₹{currentBid.currentBid} 
         </h1>
 
         <BidForm

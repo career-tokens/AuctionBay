@@ -13,7 +13,7 @@ function Products() {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.post(`http://localhost:4000/users/getproducts`);
+      const response = await axios.post(`${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`);
       if (response.status === 200) {
         setProductList(response.data);
       }

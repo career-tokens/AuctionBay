@@ -8,7 +8,7 @@ function Register() {
 
   // custom hook to handle registration logic
   const { register, loading, error } = useRegister(
-    "http://localhost:4000/users/signup"
+    `${process.env.REACT_APP_TO_BACKEND_URL}/users/signup`
   );
 
   const handleSubmit = (e) => {

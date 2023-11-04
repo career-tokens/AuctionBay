@@ -17,7 +17,7 @@ function AuthContextProvider({ children }) {
     const authReady = async () => {
       try {
         // Make a GET request to the server to check if the user is authenticated or logged in (at the very start when u open the application)
-        const res = await axios.get("http://localhost:4000/users/login", {
+        const res = await axios.get(`${process.env.REACT_APP_TO_BACKEND_URL}/users/login`, {
           withCredentials: true,
         });
         // If the request was successful, set the authentication state to reflect the authenticated user
@@ -40,7 +40,7 @@ function AuthContextProvider({ children }) {
 
   // logout function self explanatory
   const handleLogout = async () => {
-    const response = await axios.delete("http://localhost:4000/users/logout", {
+    const response = await axios.delete(`${process.env.REACT_APP_TO_BACKEND_URL}/users/logout`, {
       withCredentials: true,
     });
 

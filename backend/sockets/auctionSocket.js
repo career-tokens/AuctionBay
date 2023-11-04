@@ -8,8 +8,8 @@ module.exports = (socket, io) => {
     });
     // When a socket sends the "bid" event to the server, the "recieveBid" event will be broadcast to all connected sockets
     socket.on("bid", (data, room) => {
-      io.in(room).emit("recieveBid", data);
-      console.log(room, data);
+      io.to(room).emit("recieveBid", data);
+      console.log("sending receiveBid event to room: ",room)
     });
   
     socket.on("join", (room, callback) => {

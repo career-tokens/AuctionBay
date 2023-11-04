@@ -27,7 +27,7 @@ const Profile = () => {
   const save = async () => {
     const { v4: uuidv4 } = require('uuid');
     const productDataWithUsername = { ...productData, username: (user.username===undefined)?user:user.username ,id:uuidv4() };
-    const api = "http://localhost:4000/users/addproduct";
+    const api = `${process.env.REACT_APP_TO_BACKEND_URL}/users/addproduct`;
     const response = await axios.post(api, productDataWithUsername);
 
     if (response.status === 200) {
@@ -40,7 +40,7 @@ const Profile = () => {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/users/${(user.username===undefined)?user:user.username}`);
+      const response = await axios.get(`${process.env.REACT_APP_TO_BACKEND_URL}/users/${(user.username===undefined)?user:user.username}`);
       if (response.status === 200) {
         setProductList(response.data.products);
       }
