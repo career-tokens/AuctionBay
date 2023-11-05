@@ -26,10 +26,10 @@ function useRegister(api) {
       });
       
       const response = await res.json();
-      
+      console.log("registering and reponse=",response);
       dispatch({
         type: "LOGIN",
-        payload: res.data.user,
+        payload: response.data,
       });
 
       setLoading(false);
