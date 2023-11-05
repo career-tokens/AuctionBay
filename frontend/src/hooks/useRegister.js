@@ -12,8 +12,6 @@ function useRegister(api) {
   const navigate = useNavigate();
   const register = async (username, password, navigate_to) => {
     try {
-      console.log("username=",username);
-      console.log("password=",password);
       setLoading(true);
       const res = await fetch(api, {
         method: 'POST',

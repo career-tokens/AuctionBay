@@ -2,7 +2,6 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ user, children }) {
   // if user is not logged in, redirect to the login page
-  console.log("protected router e achi , the user=",user);
   if (!user) {
     return <Navigate to="/login" replace />;
   }
