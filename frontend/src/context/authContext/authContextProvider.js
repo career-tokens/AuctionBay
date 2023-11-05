@@ -31,6 +31,13 @@ function AuthContextProvider({ children }) {
           });
           console.log("auth ready");
         }
+        else
+        {
+                  dispatch({
+          type: "SET_AUTH_READY",
+          payload: null,
+        });
+        }
       } catch (error) {
         dispatch({
           type: "SET_AUTH_READY",

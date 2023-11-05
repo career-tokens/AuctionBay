@@ -12,6 +12,8 @@ function useRegister(api) {
   const navigate = useNavigate();
   const register = async (username, password, navigate_to) => {
     try {
+      console.log("username=",username);
+      console.log("password=",password);
       setLoading(true);
       const res = await fetch(api, {
         method: 'POST',
@@ -26,7 +28,7 @@ function useRegister(api) {
       });
       
       const response = await res.json();
-      
+      console.log("registering and reponse=",response);
       dispatch({
         type: "LOGIN",
         payload: response.data.user.username,
