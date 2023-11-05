@@ -31,7 +31,7 @@ function useRegister(api) {
       console.log("registering and reponse=",response);
       dispatch({
         type: "LOGIN",
-        payload: response.data,
+        payload: response.data.user.username,
       });
 
       setLoading(false);
