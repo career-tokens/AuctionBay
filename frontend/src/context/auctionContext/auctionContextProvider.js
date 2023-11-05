@@ -4,26 +4,39 @@ import React, { createContext, useEffect, useState } from "react";
 export const auctionContext = createContext();
 
 function AuctionContextProvider({ children }) {
-  // using the axios.get() method to get the product data from the server.
+  // using the fetch.get() method to get the product data from the server.
   // and then emit the product data to the socket.
   const getOneProduct = async (model, socket) => {
-    const url = `https://realtime-auction-backend.onrender.com/products/${model}`;
+    const url = `${process.env.REACT_APP_TO_BACKEND_URL}/products/${model}`;
     try {
-      const response = await axios.get(url, {
-        withCredentials: true,
+      const res = await fetch(url, {
+        credentials: 'include',
       });
-      socket.emit("bid", response.data.data.product, model);
+      
+      const response = await res.json();
+      
+      socket.emit("bid", response.data.product, model);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // using the axios.put() method to send the updated product data to the server.
+  // using the fetch.put() method to send the updated product data to the server.
   const updateProduct = async (product) => {
-    const url = `https://realtime-auction-backend.onrender.com/products`;
+    const url = `${process.env.REACT_APP_TO_BACKEND_URL}/products`;
 
     try {
-      const response = await axios.put(url, product, { withCredentials: true });
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+        credentials: 'include',
+      });
+      
+      const response = await res.json();
+      
       //   console.log(response.data);
     } catch (error) {
       console.error(error);

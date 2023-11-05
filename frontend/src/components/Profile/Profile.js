@@ -27,11 +27,18 @@ const Profile = () => {
   const save = async () => {
     const { v4: uuidv4 } = require('uuid');
     const productDataWithUsername = { ...productData, username: (user.username===undefined)?user:user.username ,id:uuidv4() };
-    const api = `https://realtime-auction-backend.onrender.com/users/addproduct`;
-    const response = await axios.post(api, productDataWithUsername);
+    const api = `${process.env.REACT_APP_TO_BACKEND_URL}/users/addproduct`;
+    const res = await fetch(api, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productDataWithUsername),
+    });
+    
+    const response = await res.json();
 
-    if (response.status === 200) {
-      console.log("Product saved successfully:", productDataWithUsername);
+    if (response) {
       updateProductList();
     } else {
       console.log("Error saving product");
@@ -40,10 +47,9 @@ const Profile = () => {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.get(`https://realtime-auction-backend.onrender.com/users/${(user.username===undefined)?user:user.username}`);
-      if (response.status === 200) {
-        setProductList(response.data.products);
-      }
+      const res = await fetch(`${process.env.REACT_APP_TO_BACKEND_URL}/users/${(user.username === undefined) ? user : user.username}`);
+      const response = await res.json();
+        setProductList(response.products);
     } catch (error) {
       console.error("Error fetching user products:", error);
     }

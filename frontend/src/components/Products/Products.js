@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import productsData from "../../data/products.json";
 import ProductCard from "./ProductCard";
 import { authContext } from "../../context/authContext/authContextProvider";
 import axios from "axios";
@@ -13,10 +12,9 @@ function Products() {
 
   const updateProductList = async () => {
     try {
-      const response = await axios.post(`https://realtime-auction-backend.onrender.com/users/getproducts`);
-      if (response.status === 200) {
-        setProductList(response.data);
-      }
+      const res = await fetch(`${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+      const response = await res.json();
+        setProductList(response);
     } catch (error) {
       console.error("Error fetching user products:", error);
     }
@@ -28,10 +26,9 @@ function Products() {
 
   useEffect(() => {
     // Filter the productList based on the user's search input
-    const filteredProducts = productList.filter((product) =>
+    const filteredProducts = productList.filter((product) => 
       product.model.toLowerCase().startsWith(searchInput.toLowerCase())
     );
-
     setFilteredProductList(filteredProducts);
   }, [searchInput, productList]);
 

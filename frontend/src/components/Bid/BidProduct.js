@@ -26,9 +26,18 @@ const BidProduct = ({ socket }) => {
 
   const updateThings= async () => {
     try {
-      const response = await axios.post(`https://realtime-auction-backend.onrender.com/users/getproducts`);//get all products
-      if (response.status === 200) {
-        setProductList(response.data);
+      const res= await fetch(
+        `${process.env.REACT_APP_TO_BACKEND_URL}/users/getproducts`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const response = await res.json();
+      if (response) {
+        setProductList(response);
       }
     } catch (error) {
       console.error("Error fetching user products:", error);

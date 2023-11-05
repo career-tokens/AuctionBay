@@ -13,14 +13,23 @@ function useRegister(api) {
   const register = async (username, password, navigate_to) => {
     try {
       setLoading(true);
-      const res = await axios.post(
-        api,
-        { username, password },
-        { withCredentials: true }
-      );
+      const res = await fetch(api, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        credentials: 'include',
+      });
+      
+      const response = await res.json();
+      
       dispatch({
         type: "LOGIN",
-        payload: res.data.data.user,
+        payload: res.data.user,
       });
 
       setLoading(false);

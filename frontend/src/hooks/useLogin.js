@@ -12,18 +12,25 @@ function useLogin(api) {
   const login = async (username, password, navigate_to) => {
     try {
       setLoading(true);
-      const res = await axios.post(
-        api,
-        {
+      const res = await fetch(api, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           username,
           password,
-        },
-        { withCredentials: true }
-      );
+        }),
+        credentials: 'include',
+      });
+      
+      const response = await res.json();
+      console.log("Login response: ",response)
+      
 
       dispatch({
         type: "LOGIN",
-        payload: res.data.data,
+        payload: response.data,
       });
       navigate(navigate_to);
       setLoading(false);
