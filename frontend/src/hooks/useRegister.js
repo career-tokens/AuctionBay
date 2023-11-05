@@ -29,7 +29,7 @@ function useRegister(api) {
       
       dispatch({
         type: "LOGIN",
-        payload: res.data.user,
+        payload: response.data.user.username,
       });
 
       setLoading(false);
