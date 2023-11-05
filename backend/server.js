@@ -44,7 +44,7 @@ const http = require("http").Server(app);
 const socketIO = require("socket.io")(http, {
   // setted the cors origin to allow connections to react client
   cors: {
-    origin: "https://realtime-auction.vercel.app",
+    origin:process.env.ORIGIN,
   },
 });
 // Pass to socket to handler to handle socket events from sockets/index.js
