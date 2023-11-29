@@ -33,9 +33,9 @@ function Products() {
   }, [searchInput, productList]);
 
   return (
-    <div className="flex flex-col justify-center p-3">
-      <h1 className="text-xl font-medium px-1 text-white text-center pb-4">All Auctions</h1>
-      <div className="search-bar text-center m-5 rounded-xl">
+    <div className="flex flex-col justify-center p-3 pt-[14vh]">
+      <h1 className="text-xl font-medium px-1 text-white text-center pb-4 font-[Montserrat]">ALL AUCTIONS</h1>
+      <div className="search-bar text-center m-5 mb-[7vh] rounded-xl">
       <input
           type="text"
           placeholder="Search..."
@@ -45,7 +45,7 @@ function Products() {
         />
       </div>
       {filteredProductList.length > 0 ? (
-        <div className="flex flex-wrap justify-evenly items-center gap-y-5">
+        <div className="flex flex-wrap justify-evenly items-center gap-y-[7vh]">
           {filteredProductList.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
