@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useRef } from 'react';
+import {motion} from "framer-motion"
 import { useAnimate } from 'framer-motion';
 import hammer from '../assets/hammer.jpg';
 import image1 from "../assets/image1.jpg";
@@ -17,7 +19,7 @@ import image13 from "../assets/image13.jpg";
 import ScrollingLogo from '../components/ScrollingLogo/ScrollingLogo';
 const Landing = () => {
   return (
-    <div className="landing h-screen w-screen ">
+    <div className="landing min-h-screen w-screen bg-black">
           <MouseImageTrail
       renderImageBuffer={50}
       rotationRange={25}
@@ -26,12 +28,65 @@ const Landing = () => {
       ]}
       >
       <div
-        className="image-animation w-screen h-auto"
+        className="image-animation w-screen h-screen"
           >
               <img src="https://media.istockphoto.com/id/953708478/photo/legal-law-concept-image.jpg?s=612x612&w=0&k=20&c=FIf5SdxwbD9sIsDoxDcV5Ff_k1x4rWMHmk3P49mWj0A=" alt="" className="w-screen h-screen"/>
-      </div>
+        </div>
+        <motion.div
+          className="absolute right-[3vw] font-bold  text-[6vh] text-white z-100 sm:w-[50vw] top-[30%]">
+          <motion.div
+            variants={{
+            animate:{
+               marginTop:"0%",
+               opacity:1
+            }
+            }}
+            initial={{
+              marginTop: "5%",
+              opacity:0
+            }}
+            whileInView="animate"
+            transition={{
+              duration: 1,
+            }}>
+          <p>All in One : E-Auction,E-Bidding, </p>
+          <p>E-Tendering</p>
+          </motion.div>
+
+          <motion.p className=" absolute text-[3vh] font-semibold mt-[3vh]"
+                        variants={{
+                          animate:{
+                             top:"100%",
+                             opacity:1
+                          }
+                          }}
+                          initial={{
+                            top: "110%",
+                            opacity:0
+                          }}
+                          whileInView="animate"
+                          transition={{
+                            duration: 1,
+                            delay:0.6
+                          }}
+          >India's fastest and 100% secure online e-auction platform, to procure and sell all categories of goods with ease.
+          </motion.p>
+        </motion.div>
       </MouseImageTrail>
-    <ScrollingLogo/>
+      <div className="scroll w-screen flex gap-[2vh] flex-col justify-center items-center h-[300px] text-white py-[2vh] text-[4vh] font-[Montserrat]">
+        <motion.div initial={{ opacity: 0,marginTop:"100px" }} variants={{
+          animate: {
+            opacity: 1,
+            marginTop:"0px"
+          }
+        }}
+          whileInView="animate"
+          transition={{ duration: 1 }}>
+          Trusted by world's leading companies
+        </motion.div>
+      <ScrollingLogo/>
+      </div>
+    
     </div>
   );
 };
