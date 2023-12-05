@@ -98,7 +98,7 @@ const Landing = () => {
       <div className="flex flex-wrap px-[10vw] justify-evenly gap-y-[4vh] gap-x-[5vw] text-white bg-black">
         {
           property.map((item, index) => (
-            <PropertyCard Icon={item.Icon} title={item.title} description={item.description} delay={index}/>
+            <PropertyCard Icon={item.Icon} title={item.title} description={item.description} index={index}/>
           )
           )
           }
@@ -218,9 +218,21 @@ const MouseImageTrail = ({
     );
 };
   
-const PropertyCard = ({ Icon, title, description ,delay}) => {
+const PropertyCard = ({ Icon, title, description ,index}) => {
   return (
-    <motion.div className="flex flex-col w-[300px]  text-center items-center gap-y-[1vh]" >
+    <motion.div
+      className="flex flex-col w-[300px]  text-center items-center gap-y-[1vh]"
+      initial={{
+        opacity: 0,
+        translateX: index % 2 === 0 ? -50 : 50,
+        translateY: -50,
+      }}
+      variants={{
+        animate:{opacity: 1, translateX: 0, translateY: 0}
+      }}
+      transition={{ duration: 0.3, delay: index * 0.2 }}
+      whileInView="animate"
+    >
       <div className="image w-fit p-3 rounded" style={{backgroundColor:"rgba(255, 255, 255, 0.13)",backdropFilter:"blur(15px) saturate(100%)"}}>
         <Icon sx={{color:"white",fontSize:"40px"}} />
       </div>
