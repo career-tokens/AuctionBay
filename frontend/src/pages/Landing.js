@@ -17,10 +17,16 @@ import image11 from "../assets/image11.jpg";
 import image12 from "../assets/image12.jpg";
 import image13 from "../assets/image13.jpg";
 import ScrollingLogo from '../components/ScrollingLogo/ScrollingLogo';
+import StayCurrentPortraitIcon from '@mui/icons-material/StayCurrentPortrait';
+import GavelIcon from '@mui/icons-material/Gavel';
+import BoltIcon from '@mui/icons-material/Bolt';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DynamicFormIcon from '@mui/icons-material/DynamicForm';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 const Landing = () => {
   return (
     <div className="landing min-h-screen w-screen bg-black">
-          <MouseImageTrail
+      <MouseImageTrail
       renderImageBuffer={50}
       rotationRange={25}
       images={[
@@ -73,7 +79,7 @@ const Landing = () => {
           </motion.p>
         </motion.div>
       </MouseImageTrail>
-      <div className="scroll w-screen flex gap-[2vh] flex-col justify-center items-center h-[300px] text-white py-[2vh] text-[4vh] font-[Montserrat]">
+      <div className="scroll w-screen flex gap-[2vh] flex-col justify-center items-center text-white pt-[8vh] pb-[4vh] text-[4vh] font-[Montserrat]">
         <motion.div initial={{ opacity: 0,marginTop:"100px" }} variants={{
           animate: {
             opacity: 1,
@@ -81,12 +87,23 @@ const Landing = () => {
           }
         }}
           whileInView="animate"
+          viewport={{ once: true }}
           transition={{ duration: 1 }}>
           Trusted by world's leading companies
         </motion.div>
       <ScrollingLogo/>
       </div>
-    
+      <div className="properties flex flex-col pb-[4vh] gap-y-[6vh]">
+        <motion.p className="text-center text-white font-semibold text-[4vh]  font-[Montserrat]">Main features of the App:</motion.p>
+      <div className="flex flex-wrap px-[10vw] justify-evenly gap-y-[4vh] gap-x-[5vw] text-white bg-black">
+        {
+          property.map((item, index) => (
+            <PropertyCard Icon={item.Icon} title={item.title} description={item.description} delay={index}/>
+          )
+          )
+          }
+     </div>         
+      </div>
     </div>
   );
 };
@@ -199,4 +216,24 @@ const MouseImageTrail = ({
         ))}
       </div>
     );
-  };
+};
+  
+const PropertyCard = ({ Icon, title, description ,delay}) => {
+  return (
+    <motion.div className="flex flex-col w-[300px]  text-center items-center gap-y-[1vh]" >
+      <div className="image w-fit p-3 rounded" style={{backgroundColor:"rgba(255, 255, 255, 0.13)",backdropFilter:"blur(15px) saturate(100%)"}}>
+        <Icon sx={{color:"white",fontSize:"40px"}} />
+      </div>
+      <p className="text-[22px] font-bold font-[Rubik]">{title}</p>
+      <p className="text-[18px] text-[#8b8b8b] font-[Questrial]">{description}</p>
+    </motion.div>
+  )
+}
+
+const property = [{ Icon: VisibilityIcon, title: "Transparency and Visibility", description: "Now view the entire ongoing live-auctions on your web dashboard or mobile. We strive to achieve 100% visibility in  sourcing ." }
+  , { Icon: StayCurrentPortraitIcon, title: "Mobile Apps for Suppliers", description: "Our e-auction solutions enable fastest onboarding of Suppliers, giving the clients a  gateway to sell ." }
+  , { Icon: GavelIcon, title: "User Friendly Bidding Platform", description: "Placing a bid, or live-auctioning any item on our platform is quite an easy process. You just have to register yourself !" }
+  , { Icon: BoltIcon, title: "Advanced Auction Algorithms", description: "Procol has custom built an auction engine that offers highly unique 45+ unique algorithms to generate maximum savings." }
+  , { Icon: DashboardIcon, title: "Inbuilt Templates", description: "We have ready to use yet flexible to customise templates that can onboard any category of goods including raw material,MRO etc." }
+  , { Icon: DynamicFormIcon, title: "Customised Reporting", description: "Get instant access to reports and insights with customisable parameters for greater insights to make smarter decisions." }
+]
