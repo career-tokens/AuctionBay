@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useRef } from 'react';
+import Marquee from "react-fast-marquee";
 import {motion} from "framer-motion"
 import { useAnimate } from 'framer-motion';
 import hammer from '../assets/hammer.jpg';
@@ -136,7 +137,7 @@ const Landing = () => {
         <p className="text-[#cef144]">-Robert (VincentGog)</p>
         </motion.div>
       </div>
-      <div className={`step flex flex-col sm:flex-row px-[5vw] text-white ${nonMobile?"":"text-center"}`}>
+      <div className={`step flex flex-col sm:flex-row px-[5vw] text-white ${nonMobile?"":"text-center"} mb-[6vh]`}>
         <div className="left sm:w-[40vw] w-[90vw]  text-[40px] ">
           <p className="font-bold">How It Works:</p>
           <p className="text-[25px] mb-[6vh]">4 easy steps to achieve results</p>
@@ -174,6 +175,26 @@ const Landing = () => {
             className="w-[100%] h-auto"
             src="https://www.procol.io/static/bb18f12224a835e1881b15853c8788db/a6fb7/auction-dashboard.webp" alt="" />
         </div>
+      </div>
+      <div className="testimonial-marquee">
+        <Marquee>
+        {
+          testimonials.map((item, index) => (
+            <div className="w-[700px] h-[220px] rounded flex text-white mr-[2vw] rounded-xl" style={{ backdropFilter: "blur(9px) saturate(180%)",
+            backgroundColor: "rgba(15, 23, 42, 0.9)"
+          }}>
+            <div className="left w-[200px] h-[100%] overflow-hidden">
+              <img src={`https://www.hover.dev/imgs/head-shots/${index+1}.jpg`} alt="" className="w-[200px] h-[250px] rounded-xl"/>
+            </div>
+            <div className="right w-[500px] flex flex-col px-[2vw] justify-evenly">
+              <p className="text-[25px] font-bold">{item.name}</p>
+              <p className="text-[20px] font-semibold">Founder of {item.company}</p>
+                <p className="text-[18px] text-[#87909f]">{item.say}</p>
+            </div>
+      </div>
+          ))
+        }
+         </Marquee>
       </div>
     </div>
   );
@@ -320,3 +341,36 @@ const property = [{ Icon: VisibilityIcon, title: "Transparency and Visibility", 
   , { Icon: DashboardIcon, title: "Inbuilt Templates", description: "We have ready to use yet flexible to customise templates that can onboard any category of goods including raw material,MRO etc." }
   , { Icon: DynamicFormIcon, title: "Customised Reporting", description: "Get instant access to reports and insights with customisable parameters for greater insights to make smarter decisions." }
 ]
+
+const testimonials = [
+  {
+    name: "John Smith",
+    company: "Tech Innovations Ltd.",
+    say: "The seamless online experience provided by the auction company significantly elevated our bidding process, making it effortlessly accessible and user-friendly, setting them apart from the competition."
+  },
+  {
+    name: "Alice Johnson",
+    company: "Global Solutions Inc.",
+    say: "The auction platform's intuitive interface and efficient navigation not only enhanced our overall experience but also facilitated a swift and transparent bidding process, ensuring utmost satisfaction."
+  },
+  {
+    name: "David Miller",
+    company: "EcoTech Ventures",
+    say: "One notable aspect of the auction company's service is their commitment to transparency, evident in the comprehensive details provided for each listing, instilling confidence and trust among participants."
+  },
+  {
+    name: "Emily Davis",
+    company: "Innovate Enterprises",
+    say: "The dynamic and engaging nature of the online auctions, coupled with real-time updates and notifications, kept us consistently informed, fostering a sense of excitement and active participation."
+  },
+  {
+    name: "Michael Clark",
+    company: "SecureTrade Solutions",
+    say: "The robust security measures implemented by the auction platform reassured us about the confidentiality and integrity of our transactions, creating a secure environment for buyers and sellers alike."
+  },
+  {
+    name: "Sophia Turner",
+    company: "CustomerSuccess Corp.",
+    say: "The responsive customer support team proved to be an invaluable asset, promptly addressing any queries or concerns, exemplifying the auction company's dedication to ensuring a smooth and satisfying auction experience."
+  }
+];
