@@ -39,10 +39,11 @@ const Landing = () => {
       <div
         className="image-animation w-screen h-screen"
           >
-              <img src="https://media.istockphoto.com/id/953708478/photo/legal-law-concept-image.jpg?s=612x612&w=0&k=20&c=FIf5SdxwbD9sIsDoxDcV5Ff_k1x4rWMHmk3P49mWj0A=" alt="" className="w-screen h-screen"/>
+          <img src="https://media.istockphoto.com/id/953708478/photo/legal-law-concept-image.jpg?s=612x612&w=0&k=20&c=FIf5SdxwbD9sIsDoxDcV5Ff_k1x4rWMHmk3P49mWj0A=" alt=""
+            className="w-screen sm:h-screen h-[50vh]" />
         </div>
         <motion.div
-          className="absolute right-[3vw] font-bold  text-[6vh] text-white z-100 sm:w-[50vw] top-[30%]">
+          className={`absolute right-[3vw] font-bold  text-[6vh] text-white z-100 sm:w-[50vw] top-[30%] ${nonMobile?"":"text-center"}`}>
           <motion.div
             variants={{
             animate:{
@@ -82,7 +83,7 @@ const Landing = () => {
           </motion.p>
         </motion.div>
       </MouseImageTrail>
-      <div className="scroll w-screen flex gap-[2vh] flex-col justify-center items-center text-white pt-[8vh] pb-[4vh] text-[4vh] font-[Montserrat]">
+      <div className="scroll w-screen flex gap-[2vh] text-center flex-col justify-center items-center text-white sm:pt-[8vh] pt-[3vh] pb-[4vh] text-[4vh] font-[Montserrat]">
         <motion.div initial={{ opacity: 0,marginTop:"100px" }} variants={{
           animate: {
             opacity: 1,
@@ -176,25 +177,101 @@ const Landing = () => {
             src="https://www.procol.io/static/bb18f12224a835e1881b15853c8788db/a6fb7/auction-dashboard.webp" alt="" />
         </div>
       </div>
-      <div className="testimonial-marquee">
-        <Marquee>
+      <div className="testimonial-marquee mb-[10vh]">
+        <motion.p
+          initial={{ opacity: 0,marginTop:"100px" }} variants={{
+          animate: {
+            opacity: 1,
+            marginTop:"0px"
+          }
+        }}
+          whileInView="animate"
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="text-[4vh] text-white text-center font-[Montserrat] sm:pb-[5vh] pb-[2vh]">Success Stories</motion.p>
+        <Marquee speed={200} pauseOnHover={true} pauseOnClick={true} >
         {
           testimonials.map((item, index) => (
-            <div className="w-[700px] h-[220px] rounded flex text-white mr-[2vw] rounded-xl" style={{ backdropFilter: "blur(9px) saturate(180%)",
+            <div className="sm:w-[700px] sm:h-[220px] flex text-white mr-[2vw] rounded-xl w-[525px] h-[165px]" style={{ backdropFilter: "blur(9px) saturate(180%)",
             backgroundColor: "rgba(15, 23, 42, 0.9)"
           }}>
-            <div className="left w-[200px] h-[100%] overflow-hidden">
+            <div className="left sm:w-[200px] h-[100%] overflow-hidden w-[150px]">
               <img src={`https://www.hover.dev/imgs/head-shots/${index+1}.jpg`} alt="" className="w-[200px] h-[250px] rounded-xl"/>
             </div>
             <div className="right w-[500px] flex flex-col px-[2vw] justify-evenly">
-              <p className="text-[25px] font-bold">{item.name}</p>
-              <p className="text-[20px] font-semibold">Founder of {item.company}</p>
-                <p className="text-[18px] text-[#87909f]">{item.say}</p>
+              <p className="sm:text-[25px] font-bold text-[20px]">{item.name}</p>
+              <p className="sm:text-[20px] font-semibold text-[16px]">Founder of {item.company}</p>
+                <p className="sm:text-[18px] text-[#87909f] text-[14px]">{item.say}</p>
             </div>
       </div>
           ))
-        }
-         </Marquee>
+          }
+        {
+          testimonials.map((item, index) => (
+            <div className="sm:w-[700px] sm:h-[220px] flex text-white mr-[2vw] rounded-xl w-[525px] h-[165px]" style={{ backdropFilter: "blur(9px) saturate(180%)",
+            backgroundColor: "rgba(15, 23, 42, 0.9)"
+          }}>
+            <div className="left sm:w-[200px] h-[100%] overflow-hidden w-[150px]">
+              <img src={`https://www.hover.dev/imgs/head-shots/${index+1}.jpg`} alt="" className="w-[200px] h-[250px] rounded-xl"/>
+            </div>
+            <div className="right w-[500px] flex flex-col px-[2vw] justify-evenly">
+              <p className="sm:text-[25px] font-bold text-[20px]">{item.name}</p>
+              <p className="sm:text-[20px] font-semibold text-[16px]">Founder of {item.company}</p>
+                <p className="sm:text-[18px] text-[#87909f] text-[14px]">{item.say}</p>
+            </div>
+      </div>
+          ))
+          }
+        </Marquee>
+        
+      </div>
+      <div  className="revolutionise text-center mb-[8vh] flex flex-col text-white justify-center items-center gap-y-[4vh]">
+        <motion.p
+                    initial={{ opacity: 0,marginTop:"100px" }} variants={{
+                      animate: {
+                        opacity: 1,
+                        marginTop:"0px"
+                      }
+                    }}
+                      whileInView="animate"
+                      viewport={{ once: true }}
+                      transition={{ duration: 1 }}
+          className="text-[4vh] font-bold font-[Montserrat]">AuctionBay can revolutionize procurements for you</motion.p>
+        <p className="text-[3vh] font-[Mulish]">Connect with an expert who can share more about our solutions and answer any questions you have.</p>
+        <motion.button
+          className="py-3 px-2 bg-white text-black text-lg font-[Montserrat] rounded font-semibold w-fit"
+          intial={{ rotate: "0deg" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.85, rotate: "2.5deg" } }
+          transition={{
+            duration: 0.125,
+            ease:"easeInOut"
+          }}>Get Free Demo</motion.button>
+        <p className="text-base">Fast Onboarding • Security and Privacy</p>
+      </div>
+      <div className={`relative send-email flex flex-col px-[10vw] pt-[5vh] pb-[18vh] w-full gap-[5vh] ${nonMobile?"":"text-center"}`} style={{
+        backgroundImage: "url('https://imgs.search.brave.com/AhU1iWmvuy8t-lXDtQCBqTgNN6Lw28BdBmI7vmpVo7U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsc3lub3BzaXMu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE3LzAyL2JlYXV0/aWZ1bC1jb2xvci1n/cmFkaWVudHMtYmFj/a2dyb3VuZHMtMDAx/LXdhcm0tZmxhbWUu/cG5n')",
+        backgroundSize: "cover", 
+        
+      }}>
+        <p className="text-[4vh] font-bold font-[Montserrat]">Get the latest updates in your Inbox!</p>
+        <p className="flex">
+          <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded"/>
+          <motion.button
+          className="py-3 px-2 bg-black text-white text-lg font-[Montserrat] rounded font-semibold"
+          intial={{ rotate: "0deg" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.85, rotate: "2.5deg" } }
+          transition={{
+            duration: 0.125,
+            ease:"easeInOut"
+        }}>Subscribe</motion.button>
+        </p>
+        { nonMobile&&<div className="absolute w-[30vw] right-[10vw] top-[-15vh]">
+          <img
+            className="w-[100%] h-auto"
+            src="https://cdn.pixabay.com/photo/2023/06/09/19/37/letter-8052497_640.png" alt="" />
+        </div>}
       </div>
     </div>
   );
