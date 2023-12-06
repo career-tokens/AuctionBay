@@ -93,7 +93,7 @@ const Landing = () => {
         </motion.div>
       <ScrollingLogo/>
       </div>
-      <div className="properties flex flex-col pb-[4vh] gap-y-[6vh]">
+      <div className="properties flex flex-col pb-[6vh] gap-y-[6vh]">
         <motion.p className="text-center text-white font-semibold text-[4vh]  font-[Montserrat]">Main features of the App:</motion.p>
       <div className="flex flex-wrap px-[10vw] justify-evenly gap-y-[4vh] gap-x-[5vw] text-white bg-black">
         {
@@ -103,6 +103,34 @@ const Landing = () => {
           )
           }
      </div>         
+      </div>
+      <div className="demo flex justify-center pb-[6vh]">
+        <motion.button
+          className="py-3 px-2 bg-white text-black text-lg font-[Montserrat] rounded font-semibold"
+          intial={{ rotate: "0deg" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.85, rotate: "2.5deg" } }
+          transition={{
+            duration: 0.125,
+            ease:"easeInOut"
+        }}>Get Free Demo</motion.button>
+      </div>
+      <div  className="dark-to-color w-[100%] h-[60vh] overflow-hidden relative text-white">
+        <img className="w-[100%] grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
+          src="https://imgs.search.brave.com/xhKR0w-TIUkFv5PI1jsMbxnQrqTufGBAcf14zWukr1o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMTE5/MDQxOC5qcGc"
+          alt="black-white" />
+        <motion.div
+                  initial={{ opacity: 0,top:"25%" }} variants={{
+                    animate: {
+                      opacity: 1,
+                      top:"10%"
+                    }
+                  }}
+                    whileInView="animate"
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}className="absolute top-[10%] left-[5%] w-[30%] text-[23px]   font-[Mulish]">
+       <p>“AuctionBay has helped us bring in <span className="font-bold">savings of 8-10%</span>  in our purchase. The customer support of AuctionBay is very prompt. Use of AuctionBay has also helped us bring down our turnaround time of purchase from <span className="font-bold">24 hours to 30 minutes</span>.”</p> 
+        </motion.div>
       </div>
     </div>
   );
@@ -245,7 +273,7 @@ const PropertyCard = ({ Icon, title, description ,index}) => {
 const property = [{ Icon: VisibilityIcon, title: "Transparency and Visibility", description: "Now view the entire ongoing live-auctions on your web dashboard or mobile. We strive to achieve 100% visibility in  sourcing ." }
   , { Icon: StayCurrentPortraitIcon, title: "Mobile Apps for Suppliers", description: "Our e-auction solutions enable fastest onboarding of Suppliers, giving the clients a  gateway to sell ." }
   , { Icon: GavelIcon, title: "User Friendly Bidding Platform", description: "Placing a bid, or live-auctioning any item on our platform is quite an easy process. You just have to register yourself !" }
-  , { Icon: BoltIcon, title: "Advanced Auction Algorithms", description: "Procol has custom built an auction engine that offers highly unique 45+ unique algorithms to generate maximum savings." }
+  , { Icon: BoltIcon, title: "Advanced Auction Algorithms", description: "AuctionBay has custom built an auction engine that offers highly unique 45+ unique algorithms to generate maximum savings." }
   , { Icon: DashboardIcon, title: "Inbuilt Templates", description: "We have ready to use yet flexible to customise templates that can onboard any category of goods including raw material,MRO etc." }
   , { Icon: DynamicFormIcon, title: "Customised Reporting", description: "Get instant access to reports and insights with customisable parameters for greater insights to make smarter decisions." }
 ]
