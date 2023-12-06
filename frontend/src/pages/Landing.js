@@ -23,7 +23,9 @@ import BoltIcon from '@mui/icons-material/Bolt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DynamicFormIcon from '@mui/icons-material/DynamicForm';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useMediaQuery } from '@mui/material';
 const Landing = () => {
+  const nonMobile = useMediaQuery("(min-width:640px)");
   return (
     <div className="landing min-h-screen w-screen bg-black">
       <MouseImageTrail
@@ -115,9 +117,9 @@ const Landing = () => {
             ease:"easeInOut"
         }}>Get Free Demo</motion.button>
       </div>
-      <div  className="dark-to-color w-[100%] h-[60vh] overflow-hidden relative text-white">
-        <img className="w-[100%] grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
-          src="https://imgs.search.brave.com/xhKR0w-TIUkFv5PI1jsMbxnQrqTufGBAcf14zWukr1o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMTE5/MDQxOC5qcGc"
+      <div  className="dark-to-color w-[100%] sm:h-[70vh] h-[40vh] overflow-hidden relative text-white mb-[8vh]">
+        <img className="w-[100%] sm:grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
+          src={nonMobile?"https://imgs.search.brave.com/xhKR0w-TIUkFv5PI1jsMbxnQrqTufGBAcf14zWukr1o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMTE5/MDQxOC5qcGc":"https://cdn.pixabay.com/photo/2016/03/02/10/45/port-1232089_640.jpg"}
           alt="black-white" />
         <motion.div
                   initial={{ opacity: 0,top:"25%" }} variants={{
@@ -128,9 +130,50 @@ const Landing = () => {
                   }}
                     whileInView="animate"
                     viewport={{ once: true }}
-                    transition={{ duration: 1 }}className="absolute top-[10%] left-[5%] w-[30%] text-[23px]   font-[Mulish]">
+          transition={{ duration: 1 }}
+          className="absolute top-[10%] left-[5%] sm:w-[30%] w-[90%] text-[23px]   font-[Mulish]">
        <p>“AuctionBay has helped us bring in <span className="font-bold">savings of 8-10%</span>  in our purchase. The customer support of AuctionBay is very prompt. Use of AuctionBay has also helped us bring down our turnaround time of purchase from <span className="font-bold">24 hours to 30 minutes</span>.”</p> 
+        <p className="text-[#cef144]">-Robert (VincentGog)</p>
         </motion.div>
+      </div>
+      <div className={`step flex flex-col sm:flex-row px-[5vw] text-white ${nonMobile?"":"text-center"}`}>
+        <div className="left sm:w-[40vw] w-[90vw]  text-[40px] ">
+          <p className="font-bold">How It Works:</p>
+          <p className="text-[25px] mb-[6vh]">4 easy steps to achieve results</p>
+          {
+            ["Share your product", "Invite others", "Launch event", "Start Bidding"].map((item, index) => (
+              <motion.p
+              initial={{
+                opacity: 0,
+                translateX: index % 2 === 0 ? -50 : 50,
+                translateY: -50,
+              }}
+              variants={{
+                animate:{opacity: 1, translateX: 0, translateY: 0}
+              }}
+              transition={{ duration: 0.3, delay: index * 0.2 }}
+              whileInView="animate"
+                className={`flex gap-5 items-center mb-[4vh] ${nonMobile?"":"border-2 border-white"}`}>
+              <div className="w-[60px] h-[60px] flex justify-center items-center border-2 border-white">{index+1}</div>
+              <div className="text-[30px]">{item}</div>
+            </motion.p>
+            ))
+          }
+          <motion.button
+          className="py-3 px-2 bg-white text-black text-lg font-[Montserrat] rounded font-semibold"
+          intial={{ rotate: "0deg" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.85, rotate: "2.5deg" } }
+          transition={{
+            duration: 0.125,
+            ease:"easeInOut"
+        }}>Get Free Demo</motion.button>
+        </div>
+        <div className="right sm:w-[50vw] w-[90vw] sm:mt-[0px] mt-[4vh]">
+          <img
+            className="w-[100%] h-auto"
+            src="https://www.procol.io/static/bb18f12224a835e1881b15853c8788db/a6fb7/auction-dashboard.webp" alt="" />
+        </div>
       </div>
     </div>
   );
