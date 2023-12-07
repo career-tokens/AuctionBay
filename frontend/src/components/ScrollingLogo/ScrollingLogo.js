@@ -44,7 +44,7 @@ const ScrollingLogo = () => {
 <div className="scroller" data-direction="right" data-speed="slow">
         <div className="scroller__inner">
   <div className="scroller__inner">
-    <img src={c1} alt="" className="ml-[100%] rounded-xl"/>
+    <img src={c1} alt="" className="ml-[200%] rounded-xl"/>
     <img src={c2} alt="" className="rounded-xl"/>
     <img src={c3} alt="" className="rounded-xl"/>
     <img src={c4} alt="" className="rounded-xl"/>
