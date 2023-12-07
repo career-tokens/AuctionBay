@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { authContext } from "../../context/authContext/authContextProvider";
-import axios from "axios";
-import TextField from '@mui/material/TextField';
+import MoonLoader from "react-spinners/MoonLoader";
+
+
 
 function Products() {
   const { user } = useContext(authContext);
@@ -39,7 +40,7 @@ function Products() {
       <input
           type="text"
           placeholder="Search..."
-          className="p-3 outline-none"
+          className="p-3 outline-none rounded-lg"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
@@ -51,10 +52,59 @@ function Products() {
           ))}
         </div>
       ) : (
-        <p>No matching products found.</p>
+        <Example/>
       )}
     </div>
   );
 }
 
 export default Products;
+
+const Example = () => {
+  return (
+    <div>
+      <CutoutTextLoader
+        height="450px"
+        background="white"
+        imgUrl="https://www.hover.dev/imgs/random/11.jpg"
+      />
+    </div>
+  );
+};
+
+const CutoutTextLoader = ({
+  height,
+  background,
+  imgUrl,
+}) => {
+  return (
+    <div className="relative rounded-xl" style={{ height }}>
+      <div
+        className="absolute inset-0 z-0 rounded-xl"
+        style={{
+          backgroundImage: `url(${imgUrl})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      />
+      <div
+        style={{ background }}
+        className="absolute inset-0 animate-pulse z-10 rounded-xl"
+      />
+      <span
+        className="rounded-xl font-black absolute inset-0 z-20 text-center bg-clip-text text-transparent pointer-events-none"
+        style={{
+          backgroundImage: `url(${imgUrl})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          fontSize: "clamp(3rem, 12vw, 10rem)",
+          lineHeight: height,
+        }}
+      >
+        Loading...
+      </span>
+    </div>
+  );
+};
+
+//

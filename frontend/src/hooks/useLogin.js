@@ -32,6 +32,7 @@ function useLogin(api) {
         type: "LOGIN",
         payload: response.data,
       });
+      
       navigate(navigate_to);
       setLoading(false);
     } catch (error) {

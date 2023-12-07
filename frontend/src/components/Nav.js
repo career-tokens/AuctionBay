@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { authContext } from "../context/authContext/authContextProvider";
 import LoginComponent from "./Login/LoginComponent"
 import { AnimatePresence,motion } from "framer-motion";
@@ -7,6 +7,11 @@ import { AnimatePresence,motion } from "framer-motion";
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { handleLogout, user } = useContext(authContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   return (
     <>
@@ -77,7 +82,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
             onClick={(e) => e.stopPropagation()}
             className="bg-gradient-to-br from-violet-600 to-indigo-600 text-white p-6 rounded-lg w-[100vw] max-w-lg shadow-xl cursor-default relative overflow-hidden"
           >
-          <LoginComponent/>
+          <LoginComponent setIsOpen/>
           </motion.div>
         </motion.div>
       )}

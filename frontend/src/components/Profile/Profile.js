@@ -68,14 +68,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex justify-center items-center p-3 pb-4 w-fit mb-3 rounded-xl" style={{width:"85%",boxShadow: "10px 10px 19px 0px rgba(0,0,0,0.75)"}}>
+    <div className="flex justify-center items-center p-3 pb-4 w-fit mb-3 rounded-xl mt-[12vh] font-[Montserrat]" style={{width:"85%",boxShadow: "10px 10px 19px 0px rgba(0,0,0,0.75)"}}>
       <Card className="profileCard" style={{ width: "100%", }}>
         <CardContent>
-          <Typography variant="h4" component="div" gutterBottom sx={{textAlign:"center",color:"#4e60fe"}}>
+          <Typography variant="h4" component="div" gutterBottom sx={{borderRadius:"10px",padding:"5px 0",textAlign:"center",backgroundColor:"#4e60fe",color:"white"}}>
             Hello {(user.username===undefined)?user:user.username} !
           </Typography>
-          <div className="yourProducts text-center ">
-            <p style={{fontSize:"25px",color:"violet",marginBottom:"10px"}}>Your Products:</p>
+          <div className="yourProducts text-center font-semibold mt-[2vh]">
+            <p style={{fontSize:"25px",marginBottom:"10px"}}>Your Products:</p>
             <Grid container spacing={2} sx={{marginBottom:"10px"}}>
               {productList.map((product) => (
                 <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -85,7 +85,7 @@ const Profile = () => {
                       <Typography variant="h6" component="div">
                         {product.model}
                       </Typography>
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography variant="body2" >
                       {textEllipsis(product.description)}
                       </Typography>
                     </CardContent>
@@ -94,8 +94,8 @@ const Profile = () => {
               ))}
             </Grid>
           </div>
-          <div className="addProducts flex flex-col text-center gap-y-3">
-          <p style={{fontSize:"25px",color:"violet"}}>Add Products:</p>
+          <div className="addProducts flex flex-col text-center gap-y-3 font-semibold">
+          <p style={{fontSize:"25px"}}>Add Products:</p>
           <TextField
               id="model-name"
               label="Image Public Link"
