@@ -1,9 +1,10 @@
 import React from "react";
 import Nav from "../Nav";
 import AnimatedCursor from "react-animated-cursor"
+import { useMediaQuery } from "@mui/material";
 
 function Layout({ children }) {
-
+  const nonMobile = useMediaQuery('(min-width:640px');
   return (
     <>
       <div className=" bg-[#414852]" style={{height:"fitContent",minHeight:"100vh"}}>{/**background:" linear-gradient(259deg, rgba(34,193,195,1) 0%, rgba(90,45,253,1) 100%)"*/}
@@ -12,7 +13,7 @@ function Layout({ children }) {
         {children}
       </div>
     </div>
-    <AnimatedCursor
+{ nonMobile&&   <AnimatedCursor
       innerSize={14}
       outerSize={20}
       color='0, 0, 0'
@@ -46,7 +47,7 @@ function Layout({ children }) {
           }
         }
       ]}
-    />
+    />}
     </>
   );
 }

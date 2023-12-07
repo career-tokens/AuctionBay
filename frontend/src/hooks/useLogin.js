@@ -34,6 +34,7 @@ function useLogin(api) {
       });
       
       navigate(navigate_to);
+      localStorage.setItem("present", response.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);

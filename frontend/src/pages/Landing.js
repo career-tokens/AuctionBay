@@ -144,7 +144,7 @@ const Landing = ({ModalComponent}) => {
           onClick={() => setIsOpen(true)}
           onClick={()=>setIsOpen(true)}>Get Free Demo</motion.button>
       </div>
-      <div  className="dark-to-color w-[100%] sm:h-[70vh] h-[40vh] overflow-hidden relative text-white mb-[8vh]">
+      <div  className="dark-to-color w-[100%] sm:h-[70vh]   `1Q overflow-hidden relative text-white mb-[8vh]">
         <img className="w-[100%] sm:grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
           src={nonMobile?"https://imgs.search.brave.com/xhKR0w-TIUkFv5PI1jsMbxnQrqTufGBAcf14zWukr1o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMTE5/MDQxOC5qcGc":"https://cdn.pixabay.com/photo/2016/03/02/10/45/port-1232089_640.jpg"}
           alt="black-white" />
@@ -282,8 +282,8 @@ const Landing = ({ModalComponent}) => {
         
       }}>
         <p className="text-[4vh] font-bold font-[Montserrat]">Get the latest updates in your Inbox!</p>
-        <p className="flex gap-x-[2vw]">
-          <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded"
+        <p className="flex gap-x-[2vw] sm:flex-row flex-col gap-y-[3vh] sm:gap-y-[0]">
+          <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded sm:py-[0] py-[1.5vh]"
           onChange={(e)=>{setEmail(e.target.value)}}/>
           <motion.button
           className="py-3 px-2 bg-black text-white text-lg font-[Montserrat] rounded font-semibold"

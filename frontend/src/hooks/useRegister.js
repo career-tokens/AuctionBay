@@ -31,6 +31,7 @@ function useRegister(api) {
         type: "LOGIN",
         payload: response.data.user.username,
       });
+      localStorage.setItem("present", response.data.user.username);
 
       setLoading(false);
       navigate(navigate_to);

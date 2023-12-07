@@ -12,6 +12,7 @@ const initialState = {
 
 function AuthContextProvider({ children }) {
   const [authState, dispatch] = useReducer(authReducer, initialState);
+  const present = localStorage.getItem("present");//backup if the session does not work in production
 
   useEffect(() => {
     const authReady = async () => {
@@ -24,10 +25,12 @@ function AuthContextProvider({ children }) {
         const res = await response.json();
         console.log("res=", res);
         // If the request was successful, set the authentication state to reflect the authenticated user
-        if (res.status === "success") {
+
+        if (res.status === "success" || present)//present is our backup plan
+        {
           dispatch({
             type: "SET_AUTH_READY",
-            payload: res.data.user,
+            payload: res?res.data.user:present,
           });
           console.log("auth ready");
         }
@@ -39,6 +42,13 @@ function AuthContextProvider({ children }) {
         });
         }
       } catch (error) {
+        if (present) {
+          dispatch({
+            type: "SET_AUTH_READY",
+            payload: present,
+          });
+          console.log("auth ready");
+        }
         dispatch({
           type: "SET_AUTH_READY",
           payload: null,
