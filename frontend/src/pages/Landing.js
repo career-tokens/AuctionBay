@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Marquee from "react-fast-marquee";
-import {motion} from "framer-motion"
+import emailjs from "@emailjs/browser";
+import {AnimatePresence, motion} from "framer-motion"
 import { useAnimate } from 'framer-motion';
 import hammer from '../assets/hammer.jpg';
 import image1 from "../assets/image1.jpg";
@@ -25,8 +26,31 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DynamicFormIcon from '@mui/icons-material/DynamicForm';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useMediaQuery } from '@mui/material';
-const Landing = () => {
+import { toast } from 'react-toastify';
+const Landing = ({ModalComponent}) => {
   const nonMobile = useMediaQuery("(min-width:640px)");
+  const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = () => {
+    emailjs
+      .send(
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
+        {
+          to_email: email,
+        },
+        process.env.REACT_APP_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          toast.success("Email Sent!");
+        },
+        (error) => {
+          toast.error("Some error occurred!");
+        }
+      );
+  }
   return (
     <div className="landing min-h-screen w-screen bg-black">
       <MouseImageTrail
@@ -36,8 +60,7 @@ const Landing = () => {
         image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13
       ]}
       >
-      <div
-        className="image-animation w-screen h-screen"
+      <div className="image-animation w-screen h-screen"
           >
           <img src="https://media.istockphoto.com/id/953708478/photo/legal-law-concept-image.jpg?s=612x612&w=0&k=20&c=FIf5SdxwbD9sIsDoxDcV5Ff_k1x4rWMHmk3P49mWj0A=" alt=""
             className="w-screen sm:h-screen h-[50vh]" />
@@ -117,7 +140,8 @@ const Landing = () => {
           transition={{
             duration: 0.125,
             ease:"easeInOut"
-        }}>Get Free Demo</motion.button>
+          }}
+          onClick={() => setIsOpen(true)}>Get Free Demo</motion.button>
       </div>
       <div  className="dark-to-color w-[100%] sm:h-[70vh] h-[40vh] overflow-hidden relative text-white mb-[8vh]">
         <img className="w-[100%] sm:grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
@@ -249,14 +273,15 @@ const Landing = () => {
           }}>Get Free Demo</motion.button>
         <p className="text-base">Fast Onboarding • Security and Privacy</p>
       </div>
-      <div className={`relative send-email flex flex-col px-[10vw] pt-[5vh] pb-[18vh] w-full gap-[5vh] ${nonMobile?"":"text-center"}`} style={{
+      <div className={`relative send-email flex flex-col px-[10vw] pt-[5vh] pb-[18vh] w-full gap-[5vh] ${nonMobile?"":"text-center"} overflow-hidden`} style={{
         backgroundImage: "url('https://imgs.search.brave.com/AhU1iWmvuy8t-lXDtQCBqTgNN6Lw28BdBmI7vmpVo7U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsc3lub3BzaXMu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE3LzAyL2JlYXV0/aWZ1bC1jb2xvci1n/cmFkaWVudHMtYmFj/a2dyb3VuZHMtMDAx/LXdhcm0tZmxhbWUu/cG5n')",
         backgroundSize: "cover", 
         
       }}>
         <p className="text-[4vh] font-bold font-[Montserrat]">Get the latest updates in your Inbox!</p>
         <p className="flex">
-          <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded"/>
+          <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded"
+          onChange={(e)=>{setEmail(e.target.value)}}/>
           <motion.button
           className="py-3 px-2 bg-black text-white text-lg font-[Montserrat] rounded font-semibold"
           intial={{ rotate: "0deg" }}
@@ -267,12 +292,13 @@ const Landing = () => {
             ease:"easeInOut"
         }}>Subscribe</motion.button>
         </p>
-        { nonMobile&&<div className="absolute w-[30vw] right-[10vw] top-[-15vh]">
+        { nonMobile&&<div className="absolute w-[30vw] right-[10vw] top-0 h-[100%]">
           <img
-            className="w-[100%] h-auto"
+            className="w-auto h-[100%]"
             src="https://cdn.pixabay.com/photo/2023/06/09/19/37/letter-8052497_640.png" alt="" />
         </div>}
       </div>
+      <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} ModalComponent={ ModalComponent} />
     </div>
   );
 };
@@ -451,3 +477,29 @@ const testimonials = [
     say: "The responsive customer support team proved to be an invaluable asset, promptly addressing any queries or concerns, exemplifying the auction company's dedication to ensuring a smooth and satisfying auction experience."
   }
 ];
+
+const SpringModal = ({ isOpen, setIsOpen,ModalComponent }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsOpen(false)}
+          className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: "12.5deg" }}
+            animate={{ scale: 1, rotate: "0deg" }}
+            exit={{ scale: 0, rotate: "0deg" }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-gradient-to-br from-violet-600 to-indigo-600 text-white p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+          >
+           <ModalComponent/> 
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
