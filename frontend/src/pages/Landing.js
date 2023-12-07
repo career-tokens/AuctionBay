@@ -141,7 +141,8 @@ const Landing = ({ModalComponent}) => {
             duration: 0.125,
             ease:"easeInOut"
           }}
-          onClick={() => setIsOpen(true)}>Get Free Demo</motion.button>
+          onClick={() => setIsOpen(true)}
+          onClick={()=>setIsOpen(true)}>Get Free Demo</motion.button>
       </div>
       <div  className="dark-to-color w-[100%] sm:h-[70vh] h-[40vh] overflow-hidden relative text-white mb-[8vh]">
         <img className="w-[100%] sm:grayscale hover:grayscale-0 h-[70vh] hover:scale-[1.1] transition-all"
@@ -193,7 +194,8 @@ const Landing = ({ModalComponent}) => {
           transition={{
             duration: 0.125,
             ease:"easeInOut"
-        }}>Get Free Demo</motion.button>
+        }}
+        onClick={()=>setIsOpen(true)}>Get Free Demo</motion.button>
         </div>
         <div className="right sm:w-[50vw] w-[90vw] sm:mt-[0px] mt-[4vh]">
           <img
@@ -270,7 +272,8 @@ const Landing = ({ModalComponent}) => {
           transition={{
             duration: 0.125,
             ease:"easeInOut"
-          }}>Get Free Demo</motion.button>
+          }}
+          onClick={()=>setIsOpen(true)}>Get Free Demo</motion.button>
         <p className="text-base">Fast Onboarding • Security and Privacy</p>
       </div>
       <div className={`relative send-email flex flex-col px-[10vw] pt-[5vh] pb-[18vh] w-full gap-[5vh] ${nonMobile?"":"text-center"} overflow-hidden`} style={{
@@ -279,7 +282,7 @@ const Landing = ({ModalComponent}) => {
         
       }}>
         <p className="text-[4vh] font-bold font-[Montserrat]">Get the latest updates in your Inbox!</p>
-        <p className="flex">
+        <p className="flex gap-x-[2vw]">
           <input type="text" placeholder="Enter Your Email!" className="w-[300px] text-center text-xl rounded"
           onChange={(e)=>{setEmail(e.target.value)}}/>
           <motion.button
@@ -290,7 +293,8 @@ const Landing = ({ModalComponent}) => {
           transition={{
             duration: 0.125,
             ease:"easeInOut"
-        }}>Subscribe</motion.button>
+            }}
+          onClick={handleSubmit}>Subscribe</motion.button>
         </p>
         { nonMobile&&<div className="absolute w-[30vw] right-[10vw] top-0 h-[100%]">
           <img

@@ -105,10 +105,13 @@ const BidProduct = ({ socket }) => {
 
 
   return (<>
-{ currentBid&&product&&<div className="flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 ">
+{ currentBid&&product&&<div className="pt-[12vh] sm:pt-[14vh] flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 ">
       <BidProductInfo product={product}/>
 
-      <div className="sm:w-[500px] w-full">
+      <div className="w-[500px] sm:w-[600px] w-full sm:px-[2vw] sm:py-[2vh] rounded-xl" style={{
+                       backgroundImage: "url('https://imgs.search.brave.com/AhU1iWmvuy8t-lXDtQCBqTgNN6Lw28BdBmI7vmpVo7U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsc3lub3BzaXMu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE3LzAyL2JlYXV0/aWZ1bC1jb2xvci1n/cmFkaWVudHMtYmFj/a2dyb3VuZHMtMDAx/LXdhcm0tZmxhbWUu/cG5n')",
+                       backgroundSize: "cover", 
+      }}>
         <h1 className="text-3xl">
           Current Highest Bid: ₹{currentBid.currentBid} 
         </h1>
@@ -128,3 +131,4 @@ const BidProduct = ({ socket }) => {
 };
 
 export default BidProduct;
+//https://imgs.search.brave.com/Cfx4aJ7lOg4HaJep38V6446-bKvYIC7ah3Ya4_W8YG8/rs:fit:500:0:0/g:ce/aHR0cDovL3d3dy5p/bnNpZ2h0Ym14LmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/My8wNC9ibGFjay1n/cmFkaWVudC1iYWNr/Z3JvdW5kLTMwMHgy/MjUucG5n
