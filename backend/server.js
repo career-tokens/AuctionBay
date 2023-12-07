@@ -31,12 +31,13 @@ const productRouter = require("./routes/productRoutes");
 app.use(express.json());
 
 // Enable CORS for incoming requests from a specific origin
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.ORIGIN||"https://realtime-auction.vercel.app",
-  })
-);
+app.use(cors({
+  credentials: true,
+  origin: process.env.ORIGIN || "https://realtime-auction.vercel.app",
+  allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept", "X-Requested-With"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  exposedHeaders: ["Content-Range", "X-Content-Range"],
+}));
 
 // to allow data transfer between client and server
 const http = require("http").Server(app);
