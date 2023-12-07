@@ -105,14 +105,14 @@ const BidProduct = ({ socket }) => {
 
 
   return (<>
-{ currentBid&&product&&<div className="pt-[12vh] sm:pt-[14vh] flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 ">
+{ currentBid&&product&&<div className="font-[Montserrat] pt-[12vh] sm:pt-[14vh] flex flex-col sm:flex-row w-full justify-between gap-12 sm:gap-24 pb-[2vh]">
       <BidProductInfo product={product}/>
 
-      <div className="w-[500px] sm:w-[600px] w-full sm:px-[2vw] sm:py-[2vh] rounded-xl" style={{
+      <div className="w-[500px] sm:w-[600px] w-full px-[2vw] py-[2vh] rounded-xl" style={{
                        backgroundImage: "url('https://imgs.search.brave.com/AhU1iWmvuy8t-lXDtQCBqTgNN6Lw28BdBmI7vmpVo7U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsc3lub3BzaXMu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE3LzAyL2JlYXV0/aWZ1bC1jb2xvci1n/cmFkaWVudHMtYmFj/a2dyb3VuZHMtMDAx/LXdhcm0tZmxhbWUu/cG5n')",
                        backgroundSize: "cover", 
       }}>
-        <h1 className="text-3xl">
+        <h1 className="text-2xl font-bold uppercase">
           Current Highest Bid: ₹{currentBid.currentBid} 
         </h1>
 

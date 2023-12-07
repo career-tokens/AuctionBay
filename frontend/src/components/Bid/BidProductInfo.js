@@ -41,7 +41,7 @@ function BidProductInfo({ product}) {
     y.set(0);
   };
   return (
-    <motion.div className="sm:w-[800px] bg-[cadetblue] sm:px-[2vw] sm:py-[2vh] rounded-xl hover:scale-105"
+    <motion.div className="sm:w-[800px] bg-[cadetblue] px-[2vw] py-[2vh] rounded-xl hover:scale-105"
     onMouseMove={handleMouseMove}
     onMouseLeave={handleMouseLeave}
        style={{
@@ -55,7 +55,7 @@ function BidProductInfo({ product}) {
       </div>
 
       <div className="mt-2 text-center text-white">
-        <h3 className="text-2xl font-medium">{product.model}</h3>
+        <h3 className="text-2xl font-extrabold">{product.model}</h3>
         <p className="mt-2 text-xl">{product.description} </p>
       </div>
     </motion.div>

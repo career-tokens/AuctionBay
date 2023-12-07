@@ -21,7 +21,7 @@ function BidForm({
               required
               className="rounded border-2 border-gray-300 p-2 w-full"
             />
-            (Enter a number greater than {currentBid.currentBid})
+            <span className="text-xl">(Enter a number greater than {currentBid.currentBid})</span>
             <motion.button
               className="text-lg  bg-orange-500  disabled:bg-orange-400 disabled:opacity-50  p-2 rounded"
               disabled={isDisabled}
