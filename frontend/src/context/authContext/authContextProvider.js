@@ -67,7 +67,7 @@ function AuthContextProvider({ children }) {
     });
     
     const res= await response.json();
-
+    localStorage.removeItem("present");
     dispatch({ type: "LOGOUT" });
   };
 
