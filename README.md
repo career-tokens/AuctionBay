@@ -7,3 +7,4 @@ https://www.linkedin.com/posts/mainak-mukherjee-a502b4244_hi-connections-i-made-
 
 # Deployed Link:
 https://realtime-auction.vercel.app
+(it might take some time to load since the server takes some time to wake up , please give it some time)
